@@ -4,8 +4,10 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseBoolPipe,
   ParseIntPipe,
   Post,
+  Query,
 } from '@nestjs/common';
 
 @Controller('property')
@@ -29,9 +31,13 @@ export class PropertyController {
 
   @Get(':id/:slug')
   @HttpCode(200)
-  findOne(@Param('id', ParseIntPipe) id, @Param('slug') slug: string) {
+  findOne(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('slug') slug: string,
+    @Query('sort', ParseBoolPipe) sort: boolean,
+  ) {
     return {
-      success: true,
+      success: sort,
       message: 'Get the body',
       id: typeof id,
       slug,

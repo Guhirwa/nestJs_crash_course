@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 
 @Controller('property')
 export class PropertyController {
@@ -21,11 +29,11 @@ export class PropertyController {
 
   @Get(':id/:slug')
   @HttpCode(200)
-  findOne(@Param('id') id: number, @Param('slug') slug: string) {
+  findOne(@Param('id', ParseIntPipe) id, @Param('slug') slug: string) {
     return {
       success: true,
       message: 'Get the body',
-      id,
+      id: typeof id,
       slug,
     };
   }

@@ -13,17 +13,16 @@ import {
 @Controller('property')
 export class PropertyController {
   @Get()
-  @HttpCode(200)
   findAll() {
     return 'All properties';
   }
 
   @Post()
   @HttpCode(202)
-  create(@Body('id') id: number, @Body('name') name: string) {
+  create(@Body('id', ParseIntPipe) id: number, @Body('name') name: string) {
     return {
       success: true,
-      message: 'Body have been verifyied',
+      message: 'Body have been verified',
       'Your id': id,
       'Your name': name,
     };
@@ -38,8 +37,8 @@ export class PropertyController {
   ) {
     return {
       success: sort,
-      message: 'Get the body',
-      id: typeof id,
+      message: 'Retrieved property details',
+      id: id,
       slug,
     };
   }
